@@ -2,13 +2,11 @@
 
 作者:流火夏梦                     时间:2019-07-25
 
-
-
-##### 1   下载gorm：
+##### 1   下载gorm：
 
 > $go get -u github.com/jinzhu/gorm
 
-##### 2    在项目中引入gorm：
+##### 2    在项目中引入gorm：
 
 > `import` `(`
 > 
@@ -18,7 +16,7 @@
 > 
 > `)`
 
-##### 3    定义db连接信息
+##### 3    定义db连接信息
 
 > //测试数据库连接操作  
 > db, err := gorm.Open("mysql", "root:123456@tcp(192.168.126.10:3306)/gogs?charset=utf8")  
@@ -64,8 +62,6 @@
 > 
 > `) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
 
-
-
 定义model，即struct, 定于struct时我们可以只定义我们需要从数据库中取回的特定字段：
 
 gorm在转义表名的时候会把stuct的大写字母(首字母除外) 替换成“_”，所以下面的"XzAutoServerConf "会转义成数数据库中对应“xz_auto_server conf”的表名, 对应的字段名的查找会先按照tag里面的名称去里面查找，如果没有定义标签则按照struct定义的字段查找，查找的时候struct字段中的大写会被转义成“ ”,例“GroupZone”会去查找表中的group_zone字段
@@ -85,9 +81,7 @@ gorm在转义表名的时候会把stuct的大写字母(首字母除外) 替换�
 > `Status int`
 > 
 > `}`
-
-
-
+> 
 > `//``定义数据库连接`
 > 
 > `type` `ConnInfo struct {`
@@ -145,8 +139,6 @@ gorm在转义表名的时候会把stuct的大写字母(首字母除外) 替换�
 > `}`
 
 更多grom操作可以参考：[https://jasperxu.github.io/gorm-zh/](https://jasperxu.github.io/gorm-zh/)
-
-
 
 **下面是Golang GORM使用**
 
@@ -262,5 +254,3 @@ gorm是go语言中实现数据库访问的ORM（对象关系映射）库。使�
 **总结**
 
 创建连接的mysql的连接方式，通常会在一般情况下尽快的进行数据库的连接操作我们原子化数据库操作以后通过操作数据库进行项目的业务代码的开发集成设计，数据的增删改查，业务代码的架构逻辑通常都会体现在项目的开发实现过程中。代码的数据操作是非常重要的项目构建过程！！！！！！
-
-
