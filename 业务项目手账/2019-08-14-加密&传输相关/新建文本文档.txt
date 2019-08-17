@@ -1,0 +1,61 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import time
+from Tkinter import *
+from PIL import Image , ImageTk
+# 开始使用ｔｋ绘图
+root = Tk()
+root.title("第n次测试") #在这里修改窗口的标题
+canvas = Canvas(width=800, height=600, bg='white')
+canvas.pack()
+#　要打开的图像
+a = Image.open('a.png')
+a1 = a.resize((200, 200), Image.ANTIALIAS)
+a_jpg = ImageTk.PhotoImage(a1)
+b = Image.open('b.png')
+b_size = b.resize((400, 200), Image.ANTIALIAS)
+b_jpg = ImageTk.PhotoImage(b_size)
+canvas.create_image(400, 500, image=b_jpg, tag="b")
+canvas.delete('b')
+canvas.delete('b')
+b1 = Image.open('b1.png')
+b1_size = b1.resize((400, 200), Image.ANTIALIAS)
+b1_jpg = ImageTk.PhotoImage(b1_size)
+canvas.create_image(400, 500, image=b1_jpg, tag="b")
+# 初始坐标
+x0 = 258.0
+y0 = 150.0
+# 列表将包含所有的x和y坐标.到目前为止，他们只包含初始坐标
+y = [y0]
+# 每次移动的速度或距离
+vx = 0.5# x 速度
+vy = 0.5# y 速度
+# 边界，这里要考虑到图片的大小，要预留一半的长和宽310接触330掉
+y_min = 150.0
+y_max = 320.0
+# 图片间隔时间,要动画效果，此处设为每秒４０帧
+sleep_time = 0.025
+# 运行步数
+range_min = 1
+range_max = 2000
+# 创建500次的x和y坐标
+for t in range(range_min, range_max):
+ # 新坐标等于旧坐标加每次移动的距离
+ new_y = y[t - 1] + vy
+ # 如果已经越过边界，停止向下
+ if new_y >= y_max :
+     vy = 0
+ # 添加新的值到列表
+ y.append(new_y)
+# 每次的移动
+for t in range(range_min, range_max):
+ canvas.create_image(x0, y[t], image=a_jpg, tag="a")
+ canvas.update()
+ # 暂停0.05妙，然后删除图像
+ time.sleep(sleep_time)
+ canvas.delete('a')
+#创建按钮
+button = Button(root, text='开始', relief='raised', width=8, height=2,command=Pause)
+button.grid(row=0, column=0, sticky=W, padx=5,pady=5)
+button.pack()
+root.mainloop()
