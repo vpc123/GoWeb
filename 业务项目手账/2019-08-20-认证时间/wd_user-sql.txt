@@ -1,0 +1,2 @@
+ALTER TABLE `wd_user` 
+ADD COLUMN `authentication_dt`  datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)  COMMENT '用户认证时间' AFTER `is_enabled` ;
